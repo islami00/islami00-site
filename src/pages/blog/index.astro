@@ -23,7 +23,7 @@ const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueO
           {
             posts.map((post) => (
               <ContentCard
-                href={`/blog/${post.slug}/`}
+                href={`${import.meta.env.BASE_URL}/blog/${post.slug}/`}
                 imageSrc={post.data.heroImage}
                 imageAlt=''
                 title={post.data.title}>
