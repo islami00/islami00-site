@@ -1,0 +1,59 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import ContentCard from '../../components/ContentCard.astro';
+
+const posts = (await getCollection('projects')).sort(
+  (a, b) => Number(a.data.updatedDate?.valueOf()) - Number(b.data.updatedDate?.valueOf())
+);
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <ContentCard
+                href={post.data.link}
+                classNames={{ a: 'content_link' }}
+                imageSrc={post.data.heroImage}
+                imageAlt={post.data.description}
+                title={post.data.title}
+              />
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+    <style>
+      main {
+        width: 960px;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      @media (max-width: 720px) {
+        ul {
+          gap: 0.5em;
+        }
+      }
+    </style>
+  </body>
+</html>
