@@ -4,15 +4,15 @@ interface Props {
   title: string;
   imageSrc?: string | undefined;
   imageAlt?: string;
-  classNames?: Partial<Record<"a",string>>;
+  target?: astroHTML.JSX.HTMLAttributeAnchorTarget;
 }
 
 // Need to spread for parent cid to be picked up: https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
-const { href, title, imageSrc,classNames, imageAlt = '', ...rest } = Astro.props;
+const { href, title, imageSrc, imageAlt = '',target, ...rest } = Astro.props;
 ---
 
-<li >
-  <a href={href} class={classNames?.a} {...rest}>
+<li {...rest}>
+  <a target={target}  href={href} {...rest} >
     <img width={720} height={360} src={imageSrc} alt={imageAlt} />
     <h4 class='title'>{title}</h4>
     <slot name='afterTitle' />

@@ -24,7 +24,6 @@ const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueO
             posts.map((post) => (
               <ContentCard
                 href={`/blog/${post.slug}/`}
-								classNames={{a:"content_link"}}
                 imageSrc={post.data.heroImage}
                 imageAlt=''
                 title={post.data.title}>
@@ -50,7 +49,7 @@ const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueO
         margin: 0;
         padding: 0;
       }
-      .content_link:hover .date {
+      ul a:hover .date {
         color: rgb(var(--accent));
       }
 

@@ -25,10 +25,10 @@ const posts = (await getCollection('projects')).sort(
             posts.map((post) => (
               <ContentCard
                 href={post.data.link}
-                classNames={{ a: 'content_link' }}
                 imageSrc={post.data.heroImage}
                 imageAlt={post.data.description}
                 title={post.data.title}
+                target='_blank'
               />
             ))
           }
